@@ -1,6 +1,7 @@
 """Module to define classes and methods that are helpful for scaleout"""
 
 from dask.distributed import Client, PipInstall
+import os
 
     
 def set_env(dask_worker):
