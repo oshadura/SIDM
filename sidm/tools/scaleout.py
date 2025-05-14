@@ -2,6 +2,10 @@
 
 from dask.distributed import Client, PipInstall
 
+    
+def set_env(dask_worker):
+    os.environ["XCACHE_HOST"] = "xcache.cmsaf-dev.flatiron.hollandhpc.org"
+
 
 def make_dask_client(address):
     """Create dask client that includes dependency installer"""
@@ -10,4 +14,6 @@ def make_dask_client(address):
     ]
     client = Client(address)
     client.register_plugin(PipInstall(packages=dependencies, pip_options=["--upgrade"]))
+    client.run(set_env)
+    
     return client
